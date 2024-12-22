@@ -1,48 +1,29 @@
--- Giao diện đơn giản với menu lựa chọn trong Lua sử dụng Love2D
-local options = {"Tùy chọn 1", "Tùy chọn 2", "Tùy chọn 3", "Tùy chọn 4"}
-local selected = 1
-local font
-
-function love.load()
-    -- Tải font chữ
-    font = love.graphics.newFont(20)
-end
-
-function love.update(dt)
-    -- Không có gì cần cập nhật trong hàm này cho ví dụ đơn giản này
-end
-
-function love.keypressed(key)
-    -- Di chuyển lựa chọn khi người dùng nhấn các phím mũi tên lên/xuống
-    if key == "down" then
-        selected = selected + 1
-        if selected > #options then
-            selected = 1
-        end
-    elseif key == "up" then
-        selected = selected - 1
-        if selected < 1 then
-            selected = #options
-        end
-    elseif key == "return" then
-        print("Đã chọn: " .. options[selected])
-    end
-end
-
-function love.draw()
-    love.graphics.setFont(font)
-    love.graphics.setColor(1, 1, 1)  -- Màu chữ trắng
-
-    -- Vẽ tiêu đề
-    love.graphics.print("Chọn một tùy chọn:", 200, 50)
-
-    -- Vẽ các tùy chọn
-    for i, option in ipairs(options) do
-        if i == selected then
-            love.graphics.setColor(0, 1, 0)  -- Màu xanh lá khi lựa chọn
-        else
-            love.graphics.setColor(1, 1, 1)  -- Màu trắng
-        end
-        love.graphics.print(option, 200, 100 + (i - 1) * 40)
-    end
-end
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+--------------------------------------------------------------------------------------------------------------------------------------------
+local Window = Fluent:CreateWindow({
+    --ai skid thì nhớ đổi tên =)
+    --táo hub , aniee hub :>
+    Title = "NINO Hub",
+    SubTitle = "Version 2",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(530, 350),
+    Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
+    Theme = "Darker",
+    MinimizeKey = Enum.KeyCode.End -- Used when theres no MinimizeKeybind
+})
+local Tabs = {
+    Main = Window:AddTab({ Title = "Main Farm", Icon = "home" }),
+    Setting = Window:AddTab({ Title = "Setting Farming", Icon = "settings" }),
+    Stats = Window:AddTab({ Title = "Stats", Icon = "plus-circle" }),
+    Player = Window:AddTab({ Title = "Player", Icon = "baby" }),
+    Teleport = Window:AddTab({ Title = "Travel", Icon = "palmtree" }),
+    Fruit = Window:AddTab({ Title = "Devil Fruit", Icon = "cherry" }),
+    Raid = Window:AddTab({ Title = "Raid", Icon = "swords" }),
+    Race = Window:AddTab({ Title = "Race V4", Icon = "chevrons-right" }),
+    Shop = Window:AddTab({ Title = "Buy Items", Icon = "shopping-cart" }),
+	Misc = Window:AddTab({ Title = "Miscellaneous", Icon = "list-plus" }),
+    Hop = Window:AddTab({ Title = "Hop", Icon = "wifi" }),
+}
+local Options = Fluent.Options
